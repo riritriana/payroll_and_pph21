@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Employee page</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="navigasi">
+        <ul>
+          <li>
+            <a href="#">
+              <span class="">Payroll & PPH21</span>
+              <img width="70px" height="60px" src="/images/tax1.jpg" alt="" />
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/home}">
+              <span class="icon">
+                <ion-icon name="home-outline"></ion-icon>
+            </span>
+              <span class="title">Home</span>
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/employee}">
+              <span class="icon">
+                <ion-icon name="people-outline"></ion-icon>
+            </span>
+
+              <span class="title">Employee</span>
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/payroll}">
+              <span class="icon">
+                <ion-icon name="cash-outline"></ion-icon>
+            </span>
+
+              <span class="title">Payroll</span>
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/taxCalculation}">
+              <span class="icon">
+                <ion-icon name="calculator-outline"></ion-icon>
+              </span>
+              <span class="title">Tax Calculation</span>
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/paymentJournal}">
+              <span class="icon">
+                <ion-icon name="journal-outline"></ion-icon>
+              </span>
+              <span class="title">Payment Journal</span>
+            </a>
+          </li>
+          <li>
+            <a th:href="@{/registrasi}">
+              <span class="icon"
+                ><ion-icon name="log-out-outline"></ion-icon
+              ></span>
+              <span class="title">Log Out</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+<div class="main">
+        <div class="topbar">
+          <div class="togle">
+            <div class="icon">=</div>
+          </div>
+          <div class="search">
+            <form th:action="@{/search}" method="get">
+              <label for="search">
+                <input type="text" id="search" placeholder="search berdasarkan nama..." name="search"/>
+                <button type="submit" value="search">cari</button>
+              </label>
+            </form>
+                      </div>
+
+          <div class="filter">
+            <a th:href="@{/sort-by-name-asc}">
+              <button>Sort By Name Asc</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="container-data" >
+          
+          <h1>Employee page</h1>
+
+          <button>
+            <a href="/add-employee">Add new Employee</a>
+          </button>
+          <table>
+            <thead>
+              <tr>
+                <th>Employee Name</th>
+                <th>Gender</th>
+                <th>Position Name</th>
+                <th>Basic Salary</th>
+                <th>Allowances</th>
+                <th>Employer Premium</th>
+                <th>NPWP Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <th:block th:each=" e : ${employee}">
+                <tr>
+                  <td th:text="${e.name}"></td>
+                  <td th:text="${e.gender}"></td>
+                  <td th:text="${e.positionName}"></td>
+                  <td th:text="${e.basicSalary}"></td>
+                  <td th:text="${e.allowances}"></td>
+                  <td th:text="${e.employerPremium}"></td>
+                  <td th:text="${e.npwpStatus}"></td>
+                  <td>
+                    <a
+                      th:href="@{'/update-employee/' + ${e.id}}"
+                      class="btn-action"
+                      >Update</a
+                    >
+                    <a
+                      th:href="@{'/delete-employee/' + ${e.id}}"
+                      class="btn-action"
+                      >Delete</a
+                    >
+                    <a
+                    th:href="@{'/add-payroll/' + ${e.id}}"
+                    class="btn-action"
+                    >Payroll</a
+                  >
+
+                  </td>
+                </tr>
+              </th:block>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="/js/script.js"></script>
+    <script
+    type="module"
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+  ></script>
+
+  </body>
+</html>

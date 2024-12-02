@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head> </head>
+
+  <body>
+    <div>
+      <form action="">
+        <div class="mb-3">
+          <label for="name" class="form-label">Employee Name</label>
+          <input
+            th:value="${payroll.employee.name}"
+            id="name"
+            class="form-select"
+            readonly
+          />
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Net Income Yearly</label>
+          <input
+            type="text"
+            th:value="${payroll.netIncomeYearly}"
+            id="name"
+            class="form-select"
+            readonly
+          />
+          <p th:text="${payroll.netIncomeYearly}"></p>
+        </div>
+        <div>
+          <select name="" id="ptkp">
+            <div th:each="ptkp : ${ptkps}">
+              <option
+                th:value="${ptkp.taxRatePtkp}"
+                th:text="${ptkp.status}"
+              ></option>
+            </div>
+          </select>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

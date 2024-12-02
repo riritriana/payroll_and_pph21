@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Jurnal Umum</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+      <div class="navigasi">
+        <ul>
+          <li>
+            <a href="#">
+              <span class="">Payroll & PPH21</span>
+              <img width="70px" height="60px" src="/images/tax1.jpg" alt="" />
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/home}">
+              <span class="icon">
+                <ion-icon name="home-outline"></ion-icon>
+            </span>
+              <span class="title">Home</span>
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/employee}">
+              <span class="icon">
+                <ion-icon name="people-outline"></ion-icon>
+            </span>
+
+              <span class="title">Employee</span>
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/payroll}">
+              <span class="icon">
+                <ion-icon name="cash-outline"></ion-icon>
+            </span>
+
+              <span class="title">Payroll</span>
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/taxCalculation}">
+              <span class="icon">
+                <ion-icon name="calculator-outline"></ion-icon>
+              </span>
+              <span class="title">Tax Calculation</span>
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/paymentJournal}">
+              <span class="icon">
+                <ion-icon name="journal-outline"></ion-icon>
+              </span>
+              <span class="title">Payment Journal</span>
+            </a>
+          </li>
+          <li>
+            <a th:href="@{/registrasi}">
+              <span class="icon"
+                ><ion-icon name="log-out-outline"></ion-icon
+              ></span>
+              <span class="title">Log Out</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    
+    </div>
+    <div class="main">
+        <div class="topbar">
+            <div class="togle">
+              <div class="icon">=</div>
+            </div>
+            <div class="search">
+              <form action="#">
+                <label for="">
+                  <input
+                    type="text"
+                    placeholder="search berdasarkan nama..."
+                    name="search"
+                  />
+                </label>
+              </form>
+            </div>
+  
+            <div class="filter">
+              <a >
+                <button>Sort By Name</button>
+              </a>
+            </div>
+          </div>
+          <div class="container-data">
+            <h1>Jurnal Umum Pembayaran Gaji</h1>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>No Bukti</th>
+                        <th>Nama Akun dan Keterangan</th>
+                        <th>No Akun</th>
+                        <th> Debit</th>
+                        <th> Kredit</th>
+                    </tr>
+                <tbody>
+                    <th:block>
+                        <tr>
+                            <td>2021</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Beban Gaji</td>
+                            <td></td>
+                            <td>16,408,800</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Utang PPh pasal 21</td>
+                            <td></td>
+                            <td></td>
+                            <td>1,135,796</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Utang Gaji</td>
+                            <td></td>
+                            <td></td>
+                            <td>13,019,404</td>
+                        </tr>
+                    
+                    </th:block>
+                </tbody>
+                </thead>
+            </table>
+          </div>
+    </div>
+    <script src="/js/script.js"></script>
+
+    <script
+    type="module"
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+  ></script>
+
+
+</body>
+</html>

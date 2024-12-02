@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    ...
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="main">
+        <div class="container-form">
+          <form action="">
+            <div class="mb-3">
+              <label for="status">Status </label>
+              <select id="ptpk" >
+                <option value="Tk/0" selected>Tk/0</option>
+                <option value="Tk/1">Tk/1</option>
+                <option value="Tk/2">Tk/2</option>
+                <option value="Tk/3">Tk/3</option>
+                <option value="K/0">K/0</option>
+                <option value="K/1">K/1</option>
+                <option value="K/2">K/2</option>
+                <option value="K/3">K/3</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="taxRatePtkp">
+                <input type="number" readonly id="rate-ptkp" />
+              </label>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      const ptpkSelect = document.getElementById("ptpk");
+      ptpkSelect.value = "Tk/0";
+      ptpkSelect.addEventListener("change", function () {
+        const rate = document.getElementById("rate-ptkp");
+        if(ptpkSelect.value == "Tk/0"){
+            rate.value = 54000000;
+        } else if (ptpkSelect.value == "Tk/1") {
+            rate.value = 58500000;
+        } else if (ptpkSelect.value == "Tk/2") {
+            rate.value = 63000000;
+        } else if (ptpkSelect.value == "Tk/3") {
+            rate.value = 57500000;
+        } else if (ptpkSelect.value == "K/0") {
+            rate.value = 58500000;
+        } else if (ptpkSelect.value == "K/1") {
+            rate.value = 63000000;
+        } else if (ptpkSelect.value == "K/2") {
+            rate.value = 67500000;
+        } else if (ptpkSelect.value == "K/3") {
+            rate.value = 72000000;
+        }
+      }); 
+    </script>
+  </body>
+</html>

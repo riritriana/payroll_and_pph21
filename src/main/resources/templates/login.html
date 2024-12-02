@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+      <title>Login</title>
+      <link rel="stylesheet" th:href="@{/css/login.css}">
+    </head>
+
+    <body>
+       <div class="container">
+        <div class="card ">
+            <form action="/cek-login" method="post">
+                <h1>Log in Account</h1>
+                <hr>
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" name="username" class="form-input" placeholder="username" required>
+                    <div th:if="${usernameError}" class="error" th:text="${usernameError}"></div>
+  
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required placeholder="password">
+                    <div th:if="${passwordError}" class="error" th:text="${passwordError}"></div>
+                <button type="submit" class="btn-submit">Login</button>
+                <p class="text-center mt-3">Don't have an account yet?? <a href="/registrasi" class="text-decoration-none">Register Here</a></p>
+
+            </form>
+        </div>
+        <div class="right">
+            <img th:src="@{/images/tax.jpg}" alt="Tax Image">
+
+        </div>
+       </div>
+    </body>
+</html>

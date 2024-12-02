@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+       <title>Registrasi</title>
+       <link rel="stylesheet" th:href="@{/css/login.css}">
+
+    </head>
+
+    <body>
+    <div class="container">
+        <div class="card">
+            <form action="/registrasi" method="post">
+                <h1>Register Account</h1>
+                <hr>
+                    <label for="username" >Username</label>
+                    <input type="text" id="username" name="username" class="form-input">
+                    <div th:if="${usernameError}" class="error" th:text="${usernameError}"></div>
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                    <div th:if="${passwordError}" class="error" th:text="${passwordError}"></div>
+                <button type="submit" class="btn-submit">Register</button>
+                <p class="text-center mt-3">Already have an account? <a href="/login" class="text-decoration-none">Login Here</a></p>
+
+            </form>
+
+        </div>
+        <div class="right">
+            <img th:src="@{/images/tax1.jpg}" alt="Tax Image">
+
+        </div>
+    </div>
+    </body>
+</html>
