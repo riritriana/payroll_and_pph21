@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <title>Halaman Informasi Aplikasi</title>
+    <link rel="stylesheet" th:href="@{/css/page.css}">
+    <style>
+      * Pengaturan kontainer utama */
+.container-informasi {
+    width: 80%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Mengatur judul utama */
+.container-informasi h1 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* Mengatur elemen card-info */
+.card-info {
+    padding: 20px;
+    border-top: 2px solid #3498db;
+}
+
+/* Mengatur deskripsi */
+.deskripsi h2 {
+    font-size: 24px;
+    color: #34495e;
+    margin-bottom: 10px;
+}
+
+.deskripsi h3 {
+    font-size: 18px;
+    color: #7f8c8d;
+    margin: 10px 0;
+}
+
+.deskripsi p {
+    font-size: 16px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    line-height: 1.8;
+}
+
+/* Menambahkan gaya untuk elemen <strong> */
+.deskripsi strong {
+    font-weight: bold;
+    color: #2980b9;
+}
+
+/* Mengatur warna untuk elemen yang menggunakan kelas 'color-red' */
+.color-red {
+    color: #e74c3c;
+}
+
+/* Styling untuk daftar ketentuan pajak */
+.deskripsi ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.deskripsi ul li {
+    margin: 10px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.deskripsi ul li::before {
+    content: "•";
+    color: #2980b9;
+    font-size: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.container-informasi h1:hover {
+    color: #3498db;
+    cursor: pointer;
+}
+
+.container-informasi h2:hover,
+.container-informasi h3:hover {
+    color: #2980b9;
+}
+
+@media (max-width: 768px) {
+    .container-informasi {
+        width: 95%;
+    }
+
+    .deskripsi h2 {
+        font-size: 20px;
+    }
+
+    .deskripsi h3 {
+        font-size: 16px;
+    }
+
+    .deskripsi p {
+        font-size: 14px;
+    }
+}
+    </style>
+    </head>
+
+    <body>
+     <div class="container">
+      <div class="navigasi">
+
+        <ul>
+          <li class=" judul">
+
+            <span class="judul">Payroll & PPH21</span>
+                  <hr>
+          </li>
+
+          <li>
+            <a th:href="@{/home}">
+              <span class="icon">
+                <ion-icon name="home-outline"></ion-icon>
+            </span>
+              <span class="title">Halaman Utama </span>
+            </a>
+          </li>
+
+          <li >
+            <a th:href="@{/information}">
+              <span class="icon">
+                <ion-icon name="information-circle-outline"></ion-icon>
+              </span>
+              <span class="title">Informasi</span>
+  
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/employee}">
+              <span class="icon">
+                <ion-icon name="people-outline"></ion-icon>
+            </span>
+
+              <span class="title">Karyawan</span>
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/payroll}">
+              <span class="icon">
+                <ion-icon name="cash-outline"></ion-icon>
+            </span>
+
+              <span class="title">Daftar Gaji</span>
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/show-tax-calculation}">
+              <span class="icon">
+                <ion-icon name="calculator-outline"></ion-icon>
+              </span>
+              <span class="title">Perhitungan Pajak</span>
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/paymentJournal}">
+              <span class="icon">
+                <ion-icon name="journal-outline"></ion-icon>
+              </span>
+              <span class="title">Jurnal Pembayaran</span>
+            </a>
+          </li>
+          <li>
+            <a th:href="@{/login}">
+              <span class="icon"
+                ><ion-icon name="log-out-outline"></ion-icon
+              ></span>
+              <span class="title">Keluar</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    
+        <div class="main">
+            <div class="container-informasi">
+                <h1>Informasi mengenai Aplikasi</h1>
+                <div class="card-info">
+                    <div class="deskripsi">
+                        <h2>  Selamat datang di sistem pengelolaan PPh 21 dan Payroll kami. 
+                        </h2>
+                        <p><strong>PPh 21 (Pajak Penghasilan Pasal 21) </strong> adalah pajak yang dikenakan atas penghasilan yang diterima oleh individu di Indonesia. Pajak ini merupakan bagian dari kewajiban perpajakan yang harus dibayar oleh warga negara atau badan yang menerima penghasilan. </p>
+
+                        <h3>Ketentuan dan Ketetapan Pajak :</h3>
+                        <p> berikut: </p>
+                        <P>1.Setiap Karyawan yang bergabung diperusahaan ini WAJIB ikut serta dalam Program <strong>Premi JKK </strong>yang dibayarkan perusahaan ditetapkan sebesaar 2.7% dari gaji pokok karyawan.</P>
+                        <p>2.Setiap Karyawan yang bergabung diperusahaan ini WAJIB ikut serta dalam Program <strong>Premi JKM</strong> yang dibayarkan perusahaan ditetapkan sebesar <strong> <span class="color-red">0.3%</span>  dari gaji pokok karyawan.</strong></p>
+                        <p>3.Setiap Karyawan yang bergabung diperusahaan ini WAJIB ikut serta dalam Program <strong>Premi JPK</strong>  yang ditetapkan sebesar 6 % dari gaji pokok karyawan.</p>
+                        <P>4. Setiap Karyawan yang bergabung diperusahaan ini WAJIB ikut serta dalam Program<strong>Premi JHT</strong> yang dibayarkan karyawan sebesar 2% dari gaji pokok karyawan.</P>
+
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+     <script
+     type="module"
+     src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+   ></script>
+   <script
+     nomodule
+     src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+   ></script>
+
+    </body>
+</html>

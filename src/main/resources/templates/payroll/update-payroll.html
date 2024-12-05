@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Update Payroll</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}" />
+  </head>
+
+  <body>
+    <div class="container-form">
+      <button class="btn btn-back"><a href="/payroll">Back to List</a></button>
+
+      <!-- Form untuk Update Payroll -->
+      <form action="/save-update-payroll/{id}" th:action="@{/save-update-payroll/{id}(id=${payroll.id})}" th:object="${payroll}" method="post" class="form">
+        <h1>Update Payroll</h1>
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{employee}">
+        <!-- Periode Pembayaran -->
+        <div class="mb-3">
+          <label for="payPeriod" class="form-label">Periode Pembayaran</label>
+          <input type="month" id="payPeriod" th:field="*{payPeriod}" class="form-control" />
+        </div>
+
+        <!-- Tanggal Pembayaran -->
+        <div class="mb-3">
+          <label for="paymentDate" class="form-label">Tanggal Pembayaran</label>
+          <input type="date" id="paymentDate" th:field="*{paymentDate}" class="form-control"  />
+        </div>
+
+        <!-- Gaji Pokok -->
+        <div class="mb-3">
+          <label for="basicSalary" class="form-label">Gaji Pokok</label>
+          <input type="number" id="basicSalary" th:field="*{employee.basicSalary}" class="form-control" readonly/>
+        </div>
+
+        <!-- Tunjangan -->
+        <div class="mb-3">
+          <label for="allowances" class="form-label">Tunjangan</label>
+          <input type="number" id="allowances" th:field="*{employee.allowances}" class="form-control" readonly/>
+        </div>
+
+        <!-- Premi JKK -->
+        <div class="mb-3">
+          <label for="jkkPremium" class="form-label">Premi JKK</label>
+          <input type="number" id="jkkPremium" th:field="*{jkkPremium}" class="form-control" readonly/>
+        </div>
+
+        <!-- Premi JKM -->
+        <div class="mb-3">
+          <label for="jkmPremium" class="form-label">Premi JKM</label>
+          <input type="number" id="jkmPremium" th:field="*{jkmPremium}" class="form-control" readonly/>
+        </div>
+
+        <!-- Premi JPK -->
+        <div class="mb-3">
+          <label for="jpkPremium" class="form-label">Premi JPK</label>
+          <input type="number" id="jpkPremium" th:field="*{jpkPremium}" class="form-control" readonly/>
+        </div>
+
+        <!-- Gaji Kotor (readonly, dihitung otomatis) -->
+        <div class="mb-3">
+          <label for="grossIncome" class="form-label">Gaji Kotor</label>
+          <input type="number" id="grossIncome" th:field="*{grossIncome}" class="form-control" readonly />
+        </div>
+
+        <!-- Biaya Jabatan (readonly, dihitung otomatis) -->
+        <div class="mb-3">
+          <label for="positionCost" class="form-label">Biaya Jabatan (5% dari Gaji Pokok)</label>
+          <input type="number" id="positionCost" th:field="*{positionCost}" class="form-control" readonly />
+        </div>
+
+        <!-- Pendapatan Bersih -->
+        <div class="mb-3">
+          <label for="netIncomeMonthly" class="form-label">Pendapatan Bersih Bulanan</label>
+          <input type="number" id="netIncomeMonthly" th:field="*{netIncomeMonthly}" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+          <label for="netIncomeYearly" class="form-label">Pendapatan Bersih Tahunan</label>
+          <input type="number" id="netIncomeYearly" th:field="*{netIncomeYearly}" class="form-control" readonly />
+        </div>
+
+        <!-- Button submit untuk update -->
+        <div class="d-flex justify-content-between">
+          <a href="/payroll" class="btn btn-secondary">Back to List</a>
+          <button type="submit" class="btn btn-submit">Update Payroll</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>

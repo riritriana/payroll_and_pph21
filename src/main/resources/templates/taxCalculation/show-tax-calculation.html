@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+       <title></title>
+       <link rel="stylesheet" th:href="@{/css/page.css}">
+    </head>
+
+    <body>
+       <div class="container">
+        <div class="navigasi">
+
+          <ul>
+            <li class=" judul">
+  
+              <span class="judul">Payroll & PPH21</span>
+                    <hr>
+            </li>
+  
+            <li>
+              <a th:href="@{/home}">
+                <span class="icon">
+                  <ion-icon name="home-outline"></ion-icon>
+              </span>
+                <span class="title">Halaman Utama </span>
+              </a>
+            </li>
+  
+            <li >
+              <a th:href="@{/information}">
+                <span class="icon">
+                  <ion-icon name="information-circle-outline"></ion-icon>
+                </span>
+                <span class="title">Informasi</span>
+    
+              </a>
+            </li>
+  
+            <li>
+              <a th:href="@{/employee}">
+                <span class="icon">
+                  <ion-icon name="people-outline"></ion-icon>
+              </span>
+  
+                <span class="title">Karyawan</span>
+              </a>
+            </li>
+  
+            <li>
+              <a th:href="@{/payroll}">
+                <span class="icon">
+                  <ion-icon name="cash-outline"></ion-icon>
+              </span>
+  
+                <span class="title">Daftar Gaji</span>
+              </a>
+            </li>
+  
+            <li>
+              <a th:href="@{/show-tax-calculation}">
+                <span class="icon">
+                  <ion-icon name="calculator-outline"></ion-icon>
+                </span>
+                <span class="title">Perhitungan Pajak</span>
+              </a>
+            </li>
+  
+            <li>
+              <a th:href="@{/paymentJournal}">
+                <span class="icon">
+                  <ion-icon name="journal-outline"></ion-icon>
+                </span>
+                <span class="title">Jurnal Pembayaran</span>
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/login}">
+                <span class="icon"
+                  ><ion-icon name="log-out-outline"></ion-icon
+                ></span>
+                <span class="title">Keluar</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+                      <div class="main">
+
+                <div class="topbar">
+                  <div class="togle">
+                    <div class="icon">=</div>
+                  </div>
+                  <!-- <div class="search">
+                    <form th:action="@{/search}" method="get">
+                      <label for="search">
+                        <input type="text" id="search" placeholder="search berdasarkan nama..." name="search"/>
+                        <button type="submit" value="search">cari</button>
+                      </label>
+                    </form>
+                    </div> -->
+        
+                  <!-- <div class="filter">
+                    <a th:href="@{/sort-by-name-asc}">
+                      <button>Sort By Name Asc</button>
+                    </a>
+                  </div> -->
+                </div> 
+
+                 <div class="container-data">
+                  <h1> Data Karyawan Setelah di potong PPH21 
+                  </h1>
+                  <th:block th:each="tax : ${taxCalculation}">
+                      <h3 class="mt-3">Nama Karyawan: <span th:text="${tax.employee.name}"></span></h3>
+                      <table>
+                          <thead>
+                              <tr>
+                                  <th>Data Karyawan</th>
+                                  <th>Informasi</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            
+                            <tr>
+                                  <td>Status NPWP (Nomor Pokok Wajib Pajak)</td>
+                                  <td ><span th:text="${tax.employee.npwpStatus}"></span></td>
+                            </tr>
+
+                            <tr>
+                                  <td>Pendapatan Bersih Setahun</td>
+                                  <td >Rp.<span th:text="${tax.payroll.netIncomeYearly}"></span></td>
+                            </tr>
+                            <tr>
+                              <td><strong>Dikurangi</strong></td>
+                              </tr>
+                            <tr>
+                                  <td>PTKP (Penghasilan Tidak Kena Pajak)</td>
+                                  <td>(Rp.<span th:text="${tax.ptkp.taxRatePtkp}"></span>)</td>
+                            </tr>
+
+                            <tr>
+                                  <td>PKP (Penghasilan Kena Pajak)</td>
+                                  <td >Rp.<span th:text="${tax.taxableIncome}"></span></td>
+                            </tr>
+
+                            <tr>
+                                  <td> PPh21 Terutang Setahun</td>
+                                  <td >Rp.<span th:text="${tax.taxBracket}"></span></td>
+                            </tr>
+
+                            <tr>
+                                  <td>PP2h1 Terutang Sebulan</td>
+                                  <td>Rp.<span  th:text="${tax.pph21Monthly}"></span></td>
+                            </tr>
+                          </tbody> 
+                      </table>
+                  </th:block>
+              </div> 
+              </div>
+     
+        </div>
+
+        <script src="/js/script.js"></script>
+        <script
+        type="module"
+        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+      ></script>
+      <script
+        nomodule
+        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+      ></script>
+  
+      </body>
+</html>

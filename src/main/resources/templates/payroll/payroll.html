@@ -2,18 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Payroll page</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/page.css}" />
   </head>
 
   <body>
     <div class="container">
       <div class="navigasi">
+
         <ul>
-          <li>
-            <a href="#">
-              <span class="">Payroll & PPH21</span>
-              <img width="70px" height="60px" src="/images/tax1.jpg" alt="" />
-            </a>
+          <li class=" judul">
+
+            <span class="judul">Payroll & PPH21</span>
+                  <hr>
           </li>
 
           <li>
@@ -21,7 +21,17 @@
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
             </span>
-              <span class="title">Home</span>
+              <span class="title">Halaman Utama </span>
+            </a>
+          </li>
+
+          <li >
+            <a th:href="@{/information}">
+              <span class="icon">
+                <ion-icon name="information-circle-outline"></ion-icon>
+              </span>
+              <span class="title">Informasi</span>
+  
             </a>
           </li>
 
@@ -31,7 +41,7 @@
                 <ion-icon name="people-outline"></ion-icon>
             </span>
 
-              <span class="title">Employee</span>
+              <span class="title">Karyawan</span>
             </a>
           </li>
 
@@ -41,16 +51,16 @@
                 <ion-icon name="cash-outline"></ion-icon>
             </span>
 
-              <span class="title">Payroll</span>
+              <span class="title">Daftar Gaji</span>
             </a>
           </li>
 
           <li>
-            <a th:href="@{/taxCalculation}">
+            <a th:href="@{/show-tax-calculation}">
               <span class="icon">
                 <ion-icon name="calculator-outline"></ion-icon>
               </span>
-              <span class="title">Tax Calculation</span>
+              <span class="title">Perhitungan Pajak</span>
             </a>
           </li>
 
@@ -59,15 +69,15 @@
               <span class="icon">
                 <ion-icon name="journal-outline"></ion-icon>
               </span>
-              <span class="title">Payment Journal</span>
+              <span class="title">Jurnal Pembayaran</span>
             </a>
           </li>
           <li>
-            <a th:href="@{/registrasi}">
+            <a th:href="@{/login}">
               <span class="icon"
                 ><ion-icon name="log-out-outline"></ion-icon
               ></span>
-              <span class="title">Log Out</span>
+              <span class="title">Keluar</span>
             </a>
           </li>
         </ul>
@@ -78,7 +88,7 @@
           <div class="togle">
             <div class="icon"><ion-icon name="menu-outline"></ion-icon></div>
           </div>
-          <div class="search">
+          <!-- <div class="search">
             <form action="#">
               <label for="">
                 <input
@@ -88,7 +98,7 @@
                 />
               </label>
             </form>
-          </div>
+          </div> -->
 
           <div class="filter">
             <a>
@@ -96,61 +106,91 @@
             </a>
           </div>
         </div>
+
         <div class="container-data">
-          <h1>Payroll Page</h1>
-          <table>
-            <thead>
-              <tr>
-                <th>Employee Name</th>
-                <th>Basic Salary</th>
-                <th>Allowances</th>
-                <th>Pay Period</th>
-                <th>Gross Income</th>
-                <th>Employee Premium</th>
-                <th>Position Cost</th>
-                <th>Net Income Monthly</th>
-                <th>Net Income Yearly</th>
-                <th>Payment Date</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <th:block th:each=" e : ${payroll}">
-                <tr>
-                  <td th:text="${e.employee.name}"></td>
-                  <td th:text="${e.employee.basicSalary}"></td>
-                  <td th:text="${e.employee.allowances}"></td>
-                  <td th:text="${e.payPeriod}"></td>
-                  <td th:text="${e.grossIncome}"></td>
-                  <td th:text="${e.employeePremium}"></td>
-                  <td th:text="${e.positionCost}"></td>
-                  <td th:text="${e.netIncomeMonthly}"></td>
-                  <td th:text="${e.netIncomeYearly}"></td>
-                  <td th:text="${e.paymentDate}"></td>
-                  <td>
-                    <a
-                      th:href="@{'/add-tax-calculation/' + ${e.id}}"
-                      class="btn-action"
-                      >pph21</a
-                    >
-                    <a
-                      th:href="@{'/update-payroll/' + ${e.id}}"
-                      class="btn-action"
-                      >Update</a
-                    >
-                    <a
-                      th:href="@{'/delete-payroll/' + ${e.id}}"
-                      class="btn-action"
-                      >Delete</a
-                    >
-                  </td>
-                </tr>
-              </th:block>
-            </tbody>
-          </table>
+          <h1 class="title-h1">Halaman Daftar Penggajian Karyawan</h1>
+          <th:block th:each="payroll : ${payrolls}">
+            <h3 >Nama karyawan : <span th:text="${payroll.employee.name}"></span></h3>
+            <table >
+                <thead>
+                    <tr>
+                        <th >Data Karyawan</th>
+                        <th>Informasi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Periode Pembayaran</td>
+                        <td th:text="${payroll.payPeriod}"></td>
+                    </tr>
+                    <tr>
+                      <td>Tanggal Pembayaran</td>
+                      <td th:text="${payroll.paymentDate}"></td>
+                    </tr>
+                        <tr>
+                            <td> Gaji Pokok </td>
+                            <td >Rp. <span th:text="${payroll.employee.basicSalary}"></span></td>
+                        </tr>
+            
+                    <tr>
+                        <td>Tunjangan - Tunjangan</td>
+                        <td >Rp. <span th:text="${payroll.employee.allowances}"></span></td>
+                    </tr>
+                    <tr>
+                        <td> <strong>Ditambah Dengan Premi yang dibayarkan Perusahaan</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Premi JKK</td>
+                        <td >Rp. <span th:text="${payroll.jkkPremium}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Premi JKM </td>
+                        <td >Rp. <span th:text="${payroll.jkmPremium}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Premi JPK </td>
+                        <td >Rp. <span th:text="${payroll.jpkPremium}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Pendapatan Kotor</td>
+                        <td > Rp. <span th:text="${payroll.grossIncome}"></span></td>
+                    </tr>
+                    <tr>
+                        <td> <strong>Dikurangi</strong></td>
+                     </tr>
+                    <tr>
+                        <td>Biaya Jabatan(5% dari penghasilan bruto)</td>
+                        <td > (Rp. <span th:text="${payroll.positionCost}"></span>)</td>
+                    </tr>
+                    <tr>
+                      <td>Premi JHT yg dibayar Karyawan </td>
+                      <td >(Rp. <span th:text="${payroll.jhtPremium}"></span>)</td>
+                    </tr>
+                    <tr>
+                        <td>Pendapatan Bersih sebulan</td>
+                        <td > Rp. <span th:text="${payroll.netIncomeMonthly}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Pendapatan Bersih setahun</td>
+                        <td >Rp. <span th:text="${payroll.netIncomeYearly}"></span></td>
+                    </tr>
+
+                   <tr>
+                    <td>
+                      <a th:href="@{'/add-tax-calculation/' + ${payroll.id}}" class="btn-action">Hitung pajak</a>
+                      <a th:href="@{'/update-payroll/' + ${payroll.id}}" class="btn-action">Update</a>
+                    
+                    </td>
+                   </tr>
+                </tbody>
+                
+            </table>
+        </th:block>
+
         </div>
-      </div>
-    </div>
+      </div>   
+     </div>
+     
     <script src="/js/script.js"></script>
     <script
     type="module"

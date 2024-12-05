@@ -2,18 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Home page</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/page.css}" />
   </head>
 
   <body>
     <div class="container">
       <div class="navigasi">
+
         <ul>
-          <li>
-            <a href="#">
-              <span class="">Payroll & PPH21</span>
-              <img width="70px" height="60px" src="/images/tax1.jpg" alt="" />
-            </a>
+          <li class=" judul">
+
+            <span class="judul">Payroll & PPH21</span>
+                  <hr>
           </li>
 
           <li>
@@ -21,7 +21,17 @@
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
             </span>
-              <span class="title">Home</span>
+              <span class="title">Halaman Utama </span>
+            </a>
+          </li>
+
+          <li >
+            <a th:href="@{/information}">
+              <span class="icon">
+                <ion-icon name="information-circle-outline"></ion-icon>
+              </span>
+              <span class="title">Informasi</span>
+  
             </a>
           </li>
 
@@ -31,7 +41,7 @@
                 <ion-icon name="people-outline"></ion-icon>
             </span>
 
-              <span class="title">Employee</span>
+              <span class="title">Karyawan</span>
             </a>
           </li>
 
@@ -41,16 +51,16 @@
                 <ion-icon name="cash-outline"></ion-icon>
             </span>
 
-              <span class="title">Payroll</span>
+              <span class="title">Daftar Gaji</span>
             </a>
           </li>
 
           <li>
-            <a th:href="@{/taxCalculation}">
+            <a th:href="@{/show-tax-calculation}">
               <span class="icon">
                 <ion-icon name="calculator-outline"></ion-icon>
               </span>
-              <span class="title">Tax Calculation</span>
+              <span class="title">Perhitungan Pajak</span>
             </a>
           </li>
 
@@ -59,37 +69,69 @@
               <span class="icon">
                 <ion-icon name="journal-outline"></ion-icon>
               </span>
-              <span class="title">Payment Journal</span>
+              <span class="title">Jurnal Pembayaran</span>
             </a>
           </li>
           <li>
-            <a th:href="@{/registrasi}">
+            <a th:href="@{/login}">
               <span class="icon"
                 ><ion-icon name="log-out-outline"></ion-icon
               ></span>
-              <span class="title">Log Out</span>
+              <span class="title">Keluar</span>
             </a>
           </li>
         </ul>
       </div>
       <div class="main">
         <div class="containerr-home">
+
           <div class="cardBox">
+
             <div class="card">
               <div>
                 <div class="numbers">
-                  <h3 th:text="${totalEmployees}"></h3>
+                  <h3 th:text="${ammountEmployees}"></h3>
                 </div>
                 <div class="cardName">Jumlah Karyawan</div>
                 <div class="iconBx">
                   <ion-icon name="people-outline"></ion-icon>
-                </div>
+                </div>               
               </div>
-              <div class="dashboard-img">
-                <img src="/images/tax3.jpg" alt="" />
+
+            </div>
+
+            <div class="card">
+              <div>
+                <div class="numbers">
+                  <h4>Rp.<span th:text="${totalNetSalary}"></span></h4>
+                </div>
+                <div class="cardName">Total Gaji Bulanan </div>
+                <div class="iconBx">
+                  <ion-icon name="cash-outline">
+                </div>               
               </div>
             </div>
+
+            <div class="card">
+              <div>
+                <div class="numbers">
+                  <h4>Rp.<span  th:text="${totalPph1Bulanan}"></span></h4>
+                </div>
+                <div class="cardName">Total Potongan PPH21 Bulanan</div>
+                <div class="iconBx">
+                  <ion-icon name="calculator-outline"></ion-icon>
+                </div>               
+              </div>
+            </div>
+
+
+
           </div>
+          <div class="dashboard-img">
+            <img  src="images/tax.jpg" alt="">
+        </div>
+
+
         </div>
       </div>
     </div>

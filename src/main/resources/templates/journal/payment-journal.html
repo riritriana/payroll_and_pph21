@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Jurnal Umum</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/page.css}">
 </head>
 <body>
     <div class="container">
       <div class="navigasi">
+
         <ul>
-          <li>
-            <a href="#">
-              <span class="">Payroll & PPH21</span>
-              <img width="70px" height="60px" src="/images/tax1.jpg" alt="" />
-            </a>
+          <li class=" judul">
+            <span class="judul">Payroll & PPH21</span>
+                  <hr>
           </li>
 
           <li>
@@ -21,7 +20,17 @@
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
             </span>
-              <span class="title">Home</span>
+              <span class="title">Halaman Utama </span>
+            </a>
+          </li>
+
+          <li >
+            <a th:href="@{/information}">
+              <span class="icon">
+                <ion-icon name="information-circle-outline"></ion-icon>
+              </span>
+              <span class="title">Informasi</span>
+  
             </a>
           </li>
 
@@ -31,7 +40,7 @@
                 <ion-icon name="people-outline"></ion-icon>
             </span>
 
-              <span class="title">Employee</span>
+              <span class="title">Karyawan</span>
             </a>
           </li>
 
@@ -41,16 +50,16 @@
                 <ion-icon name="cash-outline"></ion-icon>
             </span>
 
-              <span class="title">Payroll</span>
+              <span class="title">Daftar Gaji</span>
             </a>
           </li>
 
           <li>
-            <a th:href="@{/taxCalculation}">
+            <a th:href="@{/show-tax-calculation}">
               <span class="icon">
                 <ion-icon name="calculator-outline"></ion-icon>
               </span>
-              <span class="title">Tax Calculation</span>
+              <span class="title">Perhitungan Pajak</span>
             </a>
           </li>
 
@@ -59,27 +68,27 @@
               <span class="icon">
                 <ion-icon name="journal-outline"></ion-icon>
               </span>
-              <span class="title">Payment Journal</span>
+              <span class="title">Jurnal Pembayaran</span>
             </a>
           </li>
           <li>
-            <a th:href="@{/registrasi}">
+            <a th:href="@{/login}">
               <span class="icon"
                 ><ion-icon name="log-out-outline"></ion-icon
               ></span>
-              <span class="title">Log Out</span>
+              <span class="title">Keluar</span>
             </a>
           </li>
         </ul>
       </div>
-    
+  
     </div>
     <div class="main">
         <div class="topbar">
             <div class="togle">
               <div class="icon">=</div>
             </div>
-            <div class="search">
+            <!-- <div class="search">
               <form action="#">
                 <label for="">
                   <input
@@ -90,20 +99,105 @@
                 </label>
               </form>
             </div>
-  
+   -->
             <div class="filter">
-              <a >
+              <!-- <a >
                 <button>Sort By Name</button>
-              </a>
+              </a> -->
+              <button>Ekspor PDF</button>
             </div>
           </div>
           <div class="container-data">
-            <h1>Jurnal Umum Pembayaran Gaji</h1>
+            <form action="">
+              <label for="">Dari Tanggal </label>
+              <input type="date">
+              <label for="">sampai Tanggal</label>
+              <input type="date">
+            </form>
+            <h1>Jurnal Pencataan Gaji</h1>
+            <table>
+              <thead>
+                  <tr>
+                      <th>No Bukti</th>
+                      <th>Nama Akun dan Keterangan</th>
+                      <th>No Akun</th>
+                      <th> Debit</th>
+                      <th> Kredit</th>
+                  </tr>
+              <tbody>
+                  <th:block>
+                      <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td></td>
+                          <td>Utang Gaji</td>
+                          <td></td>
+                          <td th:text="${bebanGaji}"></td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td></td>
+                          <td>Beban Gaji</td>
+                          <td></td>
+                          <td></td>
+                          <td th:text="${bebanGaji}"></td>
+                      </tr>
+                  
+                  </th:block>
+              </tbody>
+              </thead>
+          </table>
+
+          <h1>Jurnal Pencataan PPH21</h1>
+          <table>
+            <thead>
+                <tr>
+                    <th>No Bukti</th>
+                    <th>Nama Akun dan Keterangan</th>
+                    <th>No Akun</th>
+                    <th> Debit</th>
+                    <th> Kredit</th>
+                </tr>
+            <tbody>
+                <th:block>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Utang Gaji</td>
+                        <td></td>
+                        <td th:text="${utangPph21}"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Beban Gaji</td>
+                        <td></td>
+                        <td></td>
+                        <td th:text="${utangPph21}"></td>
+                    </tr>
+                
+                </th:block>
+            </tbody>
+            </thead>
+        </table>
+
+
+            <h1>Jurnal Pembayaran Gaji</h1>
 
             <table>
                 <thead>
                     <tr>
-                        <th>Tanggal</th>
                         <th>No Bukti</th>
                         <th>Nama Akun dan Keterangan</th>
                         <th>No Akun</th>
@@ -113,7 +207,6 @@
                 <tbody>
                     <th:block>
                         <tr>
-                            <td>2021</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -121,28 +214,25 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td></td>
                             <td></td>
                             <td>Beban Gaji</td>
                             <td></td>
-                            <td>16,408,800</td>
+                            <td th:text="${bebanGaji}"></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td></td>
                             <td></td>
                             <td>Utang PPh pasal 21</td>
                             <td></td>
                             <td></td>
-                            <td>1,135,796</td>
+                            <td th:text="${utangPph21}"></td>
                         </tr>
                         <tr>
-                            <td></td>
                             <td></td>
                             <td>Utang Gaji</td>
                             <td></td>
                             <td></td>
-                            <td>13,019,404</td>
+                            <td th:text="${utangGaji}"></td>
                         </tr>
                     
                     </th:block>

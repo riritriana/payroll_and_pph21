@@ -1,7 +1,9 @@
 package com.project.payroll_and_pph21.models;
 
 import java.time.LocalDate;
+import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,19 +21,32 @@ import lombok.NoArgsConstructor;
 public class Payroll {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
-    private Employee employee; // Relasi ke karyawan
+    private Employee employee; // Relasi ke employee
 
     private String payPeriod; // Periode pembayaran
-    private Double grossIncome; // penghasilan kotor
-    private Double employeePremium; // premi yg dibayar karyawan
-    private Double positionCost; // biaya jabatan
-    private Double netIncomeMonthly; // penghasilan bersih perbulan
-    private Double netIncomeYearly; // penghasilan bersih setahun
     private LocalDate paymentDate; // Tanggal pembayaran
 
+    @Column(precision = 10, scale=0)
+    private BigDecimal grossIncome; // Penghasilan kotor
 
+    @Column(precision = 10, scale=0)
+    private BigDecimal jpkPremium; // Premi JPK (6%)
+
+    @Column(precision = 10, scale=0)
+    private BigDecimal jkmPremium; // Premi JKM (0.3%)
+
+    @Column(precision = 10, scale=0)
+    private BigDecimal jkkPremium; // Premi JKK (1.27%)
+    @Column(precision = 10, scale=0)
+    private BigDecimal positionCost; // Biaya jabatan (5% dari gross income)
+    @Column(precision = 10, scale=0)
+    private BigDecimal jhtPremium; // Premi JHT (2% dari basic salary)
+    @Column(precision = 10, scale=0)
+    private BigDecimal netIncomeMonthly; // Penghasilan bersih per bulan
+    @Column(precision = 10, scale=0)
+    private BigDecimal netIncomeYearly; // Penghasilan bersih per tahun
 }

@@ -2,18 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Employee page</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/page.css}" />
+    <style>
+      .judul{
+      margin-left: 20px;
+      margin-top: 4px;
+      font-weight: 400;
+      font-size: larger;
+      }
+
+    </style>
   </head>
 
   <body>
     <div class="container">
       <div class="navigasi">
+
         <ul>
-          <li>
-            <a href="#">
-              <span class="">Payroll & PPH21</span>
-              <img width="70px" height="60px" src="/images/tax1.jpg" alt="" />
-            </a>
+          <li class=" judul">
+
+            <span class="judul">Payroll & PPH21</span>
+                  <hr>
           </li>
 
           <li>
@@ -21,7 +30,17 @@
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
             </span>
-              <span class="title">Home</span>
+              <span class="title">Halaman Utama </span>
+            </a>
+          </li>
+
+          <li >
+            <a th:href="@{/information}">
+              <span class="icon">
+                <ion-icon name="information-circle-outline"></ion-icon>
+              </span>
+              <span class="title">Informasi</span>
+  
             </a>
           </li>
 
@@ -31,7 +50,7 @@
                 <ion-icon name="people-outline"></ion-icon>
             </span>
 
-              <span class="title">Employee</span>
+              <span class="title">Karyawan</span>
             </a>
           </li>
 
@@ -41,16 +60,16 @@
                 <ion-icon name="cash-outline"></ion-icon>
             </span>
 
-              <span class="title">Payroll</span>
+              <span class="title">Daftar Gaji</span>
             </a>
           </li>
 
           <li>
-            <a th:href="@{/taxCalculation}">
+            <a th:href="@{/show-tax-calculation}">
               <span class="icon">
                 <ion-icon name="calculator-outline"></ion-icon>
               </span>
-              <span class="title">Tax Calculation</span>
+              <span class="title">Perhitungan Pajak</span>
             </a>
           </li>
 
@@ -59,32 +78,37 @@
               <span class="icon">
                 <ion-icon name="journal-outline"></ion-icon>
               </span>
-              <span class="title">Payment Journal</span>
+              <span class="title">Jurnal Pembayaran</span>
             </a>
           </li>
           <li>
-            <a th:href="@{/registrasi}">
+            <a th:href="@{/login}">
               <span class="icon"
                 ><ion-icon name="log-out-outline"></ion-icon
               ></span>
-              <span class="title">Log Out</span>
+              <span class="title">Keluar</span>
             </a>
           </li>
         </ul>
       </div>
-<div class="main">
+    <div class="main">
         <div class="topbar">
           <div class="togle">
-            <div class="icon">=</div>
+            <div class="icon"><ion-icon name="menu-outline"></ion-icon></div>
           </div>
           <div class="search">
             <form th:action="@{/search}" method="get">
               <label for="search">
-                <input type="text" id="search" placeholder="search berdasarkan nama..." name="search"/>
+                <input
+                  type="text"
+                  id="search"
+                  placeholder="search berdasarkan nama..."
+                  name="search"
+                />
                 <button type="submit" value="search">cari</button>
               </label>
             </form>
-                      </div>
+          </div>
 
           <div class="filter">
             <a th:href="@{/sort-by-name-asc}">
@@ -93,8 +117,7 @@
           </div>
         </div>
 
-        <div class="container-data" >
-          
+        <div class="container-data">
           <h1>Employee page</h1>
 
           <button>
@@ -108,7 +131,6 @@
                 <th>Position Name</th>
                 <th>Basic Salary</th>
                 <th>Allowances</th>
-                <th>Employer Premium</th>
                 <th>NPWP Status</th>
                 <th>Action</th>
               </tr>
@@ -119,9 +141,8 @@
                   <td th:text="${e.name}"></td>
                   <td th:text="${e.gender}"></td>
                   <td th:text="${e.positionName}"></td>
-                  <td th:text="${e.basicSalary}"></td>
-                  <td th:text="${e.allowances}"></td>
-                  <td th:text="${e.employerPremium}"></td>
+                  <td >Rp. <span th:text="${e.basicSalary}"></span></td>
+                  <td >Rp. <span th:text="${e.allowances}"></span></td>
                   <td th:text="${e.npwpStatus}"></td>
                   <td>
                     <a
@@ -134,12 +155,9 @@
                       class="btn-action"
                       >Delete</a
                     >
-                    <a
-                    th:href="@{'/add-payroll/' + ${e.id}}"
-                    class="btn-action"
-                    >Payroll</a
-                  >
-
+                    <a th:href="@{'/add-payroll/' + ${e.id}}" class="btn-action"
+                      >Payroll</a
+                    >
                   </td>
                 </tr>
               </th:block>
@@ -148,15 +166,15 @@
         </div>
       </div>
     </div>
+    
     <script src="/js/script.js"></script>
     <script
-    type="module"
-    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-  ></script>
-  <script
-    nomodule
-    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-  ></script>
-
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>

@@ -1,41 +1,148 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head> </head>
+  <head> 
+    <title>Halaman Perhitungan Pajak PPH21</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}" />
+  </head>
 
   <body>
-    <div>
-      <form action="">
+    <div class="container-form">
+      <button class="btn btn-back"> <a href="/payroll">Kembali Ke Daftar Gaji</a></button>
+
+      <form th:action="@{/save-tax-calculation}" method="post" class="form">
+        <input type="hidden" name="id" th:value="${payroll.id}" />
+        <h1>Menghitung Pajak PPH21 Karyawan</h1>
+
         <div class="mb-3">
-          <label for="name" class="form-label">Employee Name</label>
+          <label for="name" class="form-label">Nama Karyawan </label>
           <input
             th:value="${payroll.employee.name}"
             id="name"
-            class="form-select"
+            class="form-input"
             readonly
           />
         </div>
         <div class="mb-3">
-          <label for="name" class="form-label">Net Income Yearly</label>
+          <label for="name" class="form-label">Status Npwp</label>
           <input
-            type="text"
-            th:value="${payroll.netIncomeYearly}"
-            id="name"
-            class="form-select"
+            th:value="${payroll.employee.npwpStatus}"
+            id="npwpStatus"
+            class="form-input"
             readonly
           />
-          <p th:text="${payroll.netIncomeYearly}"></p>
         </div>
-        <div>
-          <select name="" id="ptkp">
+
+        <div class="mb-3">
+          <label for="name" class="form-label">Pendapatan Bersih Setahun</label>
+          <input
+            type="number"
+            th:value="${payroll.netIncomeYearly}"
+            id="netIncomeYearly"
+            class="form-input"
+            readonly
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="" class="form-label">Status PTKP </label>
+          <select th:data-ptkps="${ptkpsJson}" name="ptkpId" id="ptkp" class="form-select">
             <div th:each="ptkp : ${ptkps}">
               <option
-                th:value="${ptkp.taxRatePtkp}"
+                th:value="${ptkp.status}"
                 th:text="${ptkp.status}"
               ></option>
             </div>
           </select>
         </div>
+
+        <div class="mb-3">
+          <label for="" class="form-label">PTKP (Penghasilan Tidak Kena Pajak)</label>
+          <input type="number" id="nominalPtkp" class="form-input" readonly />
+        </div>
+
+        <div class="mb-3">
+          <label for="" class="form-label">PKP (Penghasilan Kena Pajak)</label>
+          <input type="number" name="taxableIncome" id="pkp" class="form-input" readonly />
+        </div>
+
+        <div class="mb-3">
+          <label for="" class="form-label">Pajak Terutang Setahun</label>
+          <input type="number" name="taxBracket" id="tax-bracket" class="form-input" readonly />
+        </div>
+
+        <div class="mb-3">
+          <label for="" class="form-label">Pajak Terutang Sebulan</label>
+          <input type="number" name="pph21Monthly" id="pph21Monthly" class="form-input" readonly />
+        </div>
+
+        <div class="d-flex justify-content-evelyn">
+          <button type="submit" class="btn btn-submit">Simpan</button>
+          <button href="/payroll" class="btn btn-secondary">Batal</button>
+
+        </div>
       </form>
     </div>
+    <script >
+      ///////////////////////////PERHITUNGAN PTKP //////////////////////
+      const ptkp = document.getElementById("ptkp");
+const nominalPtkp = document.getElementById("nominalPtkp");
+const pkp = document.getElementById("pkp");
+const taxBracket = document.getElementById("tax-bracket");
+const netIncomeYearly = document.getElementById("netIncomeYearly");
+const pph21Monthly = document.getElementById("pph21Monthly");
+
+// Inisialisasi PTKP
+nominalPtkp.value = 54000000;
+
+// Hitung PKP dan Pajak
+pkp.value = netIncomeYearly.value - nominalPtkp.value;
+let totalTax = calculateTax(pkp.value);
+taxBracket.value = totalTax;
+// Update Pph21 Monthly
+pph21Monthly.value = Math.round(totalTax / 12);
+const ptkps = JSON.parse(ptkp.dataset.ptkps);
+ptkp.addEventListener("change", (e) => {
+  ptkps.forEach(p => {
+    if (e.target.value == p.status) {
+      nominalPtkp.value = p.taxRatePtkp;
+    }
+  });
+  pkp.value = netIncomeYearly.value - nominalPtkp.value;
+  let totalTax = calculateTax(pkp.value);
+  taxBracket.value = totalTax;
+  pph21Monthly.value = Math.round(totalTax / 12);
+});
+
+function calculateTax(pkpValue) {
+  let limaPersen = 0;
+  let limaBelasPersen = 0;
+  let duaPuluhLimaPersen = 0;
+  let tigaPuluhPersen = 0;
+
+  if (pkpValue > 0) {
+    if (pkpValue <= 60000000) {
+      limaPersen = pkpValue * 0.05;
+    } else {
+      limaPersen = 60000000 * 0.05;
+      if (pkpValue <= 250000000) {
+        limaBelasPersen = (pkpValue - 60000000) * 0.15;
+      } else {
+        limaBelasPersen = (250000000 - 60000000) * 0.15;
+        if (pkpValue <= 500000000) {
+          duaPuluhLimaPersen = (pkpValue - 250000000) * 0.25;
+        } else {
+          duaPuluhLimaPersen = (500000000 - 250000000) * 0.25;
+          tigaPuluhPersen = (pkpValue - 500000000) * 0.30;
+        }
+      }
+    }
+  }
+  return (
+    limaPersen + limaBelasPersen + duaPuluhLimaPersen + tigaPuluhPersen
+  );
+}
+
+    </script>
+
   </body>
 </html>

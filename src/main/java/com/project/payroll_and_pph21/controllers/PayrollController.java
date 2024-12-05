@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.project.payroll_and_pph21.models.Employee;
 import com.project.payroll_and_pph21.models.Payroll;
 import com.project.payroll_and_pph21.services.EmployeeService;
 import com.project.payroll_and_pph21.services.PayrollService;
@@ -26,15 +25,15 @@ public class PayrollController {
     @GetMapping("/payroll")
     public String payroll(Model model) {
         List<Payroll> payroll = payrollService.getAPayrolls();
-        model.addAttribute("payroll", payroll);
+        System.out.println(payroll);
+        model.addAttribute("payrolls", payroll);
         model.addAttribute("employee", employeeService.getAllEmployees());
         return "payroll/payroll";
     }
 
     @GetMapping("/add-payroll/{id}")
     public String addPayroll(@PathVariable Long id, Model model) {
-        model.addAttribute("payroll", new Payroll());
-        model.addAttribute("employee", employeeService.findById(id));
+        model.addAttribute("payroll", payrollService.newPayroll(id));
         return "/payroll/add-payroll";
     }
 
@@ -49,31 +48,39 @@ public class PayrollController {
         Payroll payroll = payrollService.findById(id);
         model.addAttribute("payroll", payroll);
         model.addAttribute("employee", employeeService.getAllEmployees());
-        return "/payroll/payroll";
+        return "/payroll/update-payroll";
     }
 
     @PostMapping("/save-payroll")
-    public String savePayroll(Payroll payroll, Employee employee, Model model) {
-        payrollService.saveNewPayroll(payroll, employee);
+    public String savePayroll(Payroll payroll, String name, Model model) {
+        payrollService.saveNewPayroll(payroll, name);
         return "redirect:/payroll";
     }
 
     @PostMapping("/save-update-payroll/{id}")
-    public String saveUpdate(@PathVariable(value = "id") Long id, @ModelAttribute("payroll") Payroll payroll,
-            Model model) {
+    public String saveUpdate(@PathVariable(value = "id") Long id, @ModelAttribute("payroll") Payroll payroll, Model model) {
+        // Cari payroll yang ingin diperbarui berdasarkan ID
         Payroll update = payrollService.findById(id);
+        
         if (update != null) {
             update.setEmployee(payroll.getEmployee());
-            update.setPayPeriod(payroll.getPayPeriod());
-            update.setGrossIncome(payroll.getGrossIncome());
-            update.setEmployeePremium(payroll.getEmployeePremium());
-            update.setPositionCost(payroll.getPositionCost());
-            update.setNetIncomeMonthly(payroll.getNetIncomeMonthly());
-            update.setNetIncomeYearly(payroll.getNetIncomeYearly());
-            update.setPaymentDate(payroll.getPaymentDate());
+            update.setPayPeriod(payroll.getPayPeriod());  // Periode pembayaran
+            update.setPaymentDate(payroll.getPaymentDate());  // Tanggal pembayaran
+    
+            update.setGrossIncome(payroll.getGrossIncome());  // Penghasilan kotor
+            update.setJhtPremium(payroll.getJhtPremium());  // Premi JHT
+            update.setPositionCost(payroll.getPositionCost());  // Biaya jabatan
+            update.setNetIncomeMonthly(payroll.getNetIncomeMonthly());  // Penghasilan bersih per bulan
+            update.setNetIncomeYearly(payroll.getNetIncomeYearly());  // Penghasilan bersih per tahun
+    
+            update.setJpkPremium(payroll.getJpkPremium());  // Premi JPK
+            update.setJkmPremium(payroll.getJkmPremium());  // Premi JKM
+            update.setJkkPremium(payroll.getJkkPremium());  // Premi JKK
+    
             payrollService.save(update);
         }
+    
         return "redirect:/payroll";
     }
-
+    
 }

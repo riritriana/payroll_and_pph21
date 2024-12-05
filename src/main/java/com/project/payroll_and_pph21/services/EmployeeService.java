@@ -7,18 +7,25 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.project.payroll_and_pph21.models.Employee;
-import com.project.payroll_and_pph21.models.Payroll;
 import com.project.payroll_and_pph21.repositories.EmployeeRepository;
-import com.project.payroll_and_pph21.repositories.PayrollRepository;
 
 @Service
 public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
-    @Autowired
-    private PayrollRepository payrollRepository;
 
-    public void save (Employee employee){
+    public void save (Employee employee) throws Exception{
+        List<Employee> employees = getAllEmployees();
+        Boolean same = false;
+        for (Employee employee2 : employees) {
+            if (employee2.getName().startsWith(employee.getName())) {
+                same = true;
+                break;
+            }
+        }
+        if (same) {
+            throw new Exception("Karyawan Sudah Ada, mohon input nama yang beda");
+        }
         employeeRepository.save(employee);
     }
 
@@ -40,16 +47,6 @@ public class EmployeeService {
     public List<Employee> sortByNameAsc() {
         // Menggunakan method findAll() dari JpaRepository yang sudah diurutkan berdasarkan nama
         return employeeRepository.findAll(Sort.by(Sort.Order.asc("name")));
-    }
-
-    public Payroll newPayroll(Long id) {
-        Employee employee = employeeRepository.findById(id).orElse(null);
-        Payroll payroll = new Payroll();
-        payroll.setEmployee(employee);
-        payroll.setGrossIncome(employee.getBasicSalary() + employee.getAllowances() + employee.getEmployerPremium());
-        payroll.setPositionCost(payroll.getGrossIncome()*0.05);
-        payrollRepository.save(payroll);
-        return payroll;
     }
 
 }

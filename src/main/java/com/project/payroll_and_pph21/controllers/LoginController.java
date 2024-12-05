@@ -34,7 +34,6 @@ public class LoginController {
         // Validasi password
         if (login.getPassword().length() < 8 || login.getPassword().length() > 10) {
             model.addAttribute("passwordError", "Password harus antara 8 hingga 10 karakter.");
-            // return"registrasi";
         }
 
         // Jika ada error pada validasi, kembalikan ke halaman registrasi
@@ -57,7 +56,7 @@ public class LoginController {
         Login login = loginService.login(username, password);
         if (login != null) {
             model.addAttribute("login", login);
-            return "home";
+            return "redirect:/home";
         } else {
             return "redirect:/login";
         }
